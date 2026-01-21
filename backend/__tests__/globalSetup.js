@@ -12,12 +12,9 @@ module.exports = async () => {
   
   const mongoUri = mongoServer.getUri();
   
-  await mongoose.connect(mongoUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  await mongoose.connect(mongoUri);
   
-  // Store the mongoServer instance for teardown
+  // Store mongoServer instance for teardown
   global.__MONGOINSTANCE = mongoServer;
   global.__MONGOURI = mongoUri;
   

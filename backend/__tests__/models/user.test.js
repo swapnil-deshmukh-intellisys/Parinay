@@ -2,6 +2,22 @@ const mongoose = require('mongoose');
 const User = require('../../models/User');
 
 describe('User Model', () => {
+  beforeAll(async () => {
+    // Wait for MongoDB connection
+    if (mongoose.connection.readyState !== 1) {
+      await new Promise(resolve => {
+        const checkConnection = () => {
+          if (mongoose.connection.readyState === 1) {
+            resolve();
+          } else {
+            setTimeout(checkConnection, 100);
+          }
+        };
+        checkConnection();
+      });
+    }
+  });
+
   beforeEach(async () => {
     await User.deleteMany({});
   });
