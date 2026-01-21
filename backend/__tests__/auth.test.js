@@ -1,36 +1,15 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
 const User = require('../models/User');
 
-// Set test environment before requiring server
 process.env.NODE_ENV = 'test';
 const app = require('../server');
 
 describe('Authentication API', () => {
-  let mongoServer;
-
-  beforeAll(async () => {
-    // Start in-memory MongoDB instance
-    mongoServer = await MongoMemoryServer.create();
-    const mongoUri = mongoServer.getUri();
-    
-    // Connect to in-memory database
-    await mongoose.connect(mongoUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-  }, 30000);
+  beforeEach(async () => {
+    await User.deleteMany({});
+  });
 
   afterAll(async () => {
-    // Close database connection and stop server
-    await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
-    await mongoServer.stop();
-  }, 30000);
-
-  beforeEach(async () => {
-    // Clear database before each test
     await User.deleteMany({});
   });
 

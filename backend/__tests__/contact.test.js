@@ -1,31 +1,15 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
 const Contact = require('../models/Contact');
 
 process.env.NODE_ENV = 'test';
 const app = require('../server');
 
 describe('Contact API', () => {
-  let mongoServer;
-
-  beforeAll(async () => {
-    mongoServer = await MongoMemoryServer.create();
-    const mongoUri = mongoServer.getUri();
-    
-    await mongoose.connect(mongoUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-  }, 30000);
+  beforeEach(async () => {
+    await Contact.deleteMany({});
+  });
 
   afterAll(async () => {
-    await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
-    await mongoServer.stop();
-  }, 30000);
-
-  beforeEach(async () => {
     await Contact.deleteMany({});
   });
 
