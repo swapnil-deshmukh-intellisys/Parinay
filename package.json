@@ -1,0 +1,42 @@
+{
+  "name": "parinay-fullstack",
+  "version": "1.0.0",
+  "description": "Parinay Matrimony Platform - Full Stack Testing Framework",
+  "private": true,
+  "scripts": {
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd parinay && npm test -- --watch=false --browsers=ChromeHeadless",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:coverage": "npm run test:backend:coverage && npm run test:frontend:coverage",
+    "test:backend:coverage": "cd backend && npm run test:coverage",
+    "test:frontend:coverage": "cd parinay && npm test -- --code-coverage --watch=false --browsers=ChromeHeadless",
+    "test:all": "npm run test:backend && npm run test:frontend && npm run test:e2e",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "eslint backend/**/*.js --ext .js",
+    "lint:frontend": "cd parinay && npx ng lint",
+    "lint:fix": "npm run lint:backend:fix && npm run lint:frontend:fix",
+    "lint:backend:fix": "eslint backend/**/*.js --ext .js --fix",
+    "lint:frontend:fix": "cd parinay && npx ng lint --fix",
+    "install:all": "npm install && cd backend && npm install && cd ../parinay && npm install"
+  },
+  "keywords": [
+    "testing",
+    "jest",
+    "playwright",
+    "angular",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.48.2",
+    "@types/node": "^22.10.5",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "typescript": "^5.8.3"
+  }
+}

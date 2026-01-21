@@ -1,0 +1,42 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*", "node_modules/**/*", "dist/**/*", "coverage/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": ["tsconfig.json", "parinay/tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    },
+    {
+      "files": ["*.js"],
+      "extends": ["eslint:recommended"],
+      "env": {
+        "node": true,
+        "es2021": true
+      },
+      "rules": {
+        "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+      }
+    }
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true,
+    "jasmine": true
+  }
+}
