@@ -20,14 +20,14 @@ describe('Authentication API', () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-  });
+  }, 30000);
 
   afterAll(async () => {
     // Close database connection and stop server
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
     await mongoServer.stop();
-  });
+  }, 30000);
 
   beforeEach(async () => {
     // Clear database before each test

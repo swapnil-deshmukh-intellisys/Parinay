@@ -12,13 +12,13 @@ describe('User Model', () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-  });
+  }, 30000);
 
   afterAll(async () => {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
     await mongoServer.stop();
-  });
+  }, 30000);
 
   beforeEach(async () => {
     await User.deleteMany({});
