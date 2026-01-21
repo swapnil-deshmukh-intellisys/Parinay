@@ -31,7 +31,7 @@ describe('AboutComponent', () => {
   it('should have no component-specific properties or methods to test', () => {
     // This is a simple component with no logic
     // Testing that it renders without errors is sufficient
-    expect(Object.keys(component)).toHaveLength(0);
+    expect(Object.keys(component).length).toBe(0);
   });
 
   it('should be standalone component', () => {

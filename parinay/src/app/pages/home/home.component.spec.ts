@@ -86,11 +86,11 @@ describe('HomeComponent', () => {
   it('should handle touch swipe', () => {
     const touchStartEvent = {
       changedTouches: [{ screenX: 100 }]
-    } as TouchEvent;
+    } as any;
 
     const touchEndEvent = {
       changedTouches: [{ screenX: 50 }]
-    } as TouchEvent;
+    } as any;
 
     spyOn(component, 'scrollProfiles');
 

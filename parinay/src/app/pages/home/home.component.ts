@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecentSuccessStoriesComponent } from '../../components/recent-success-stories/recent-success-stories.component';
 
@@ -9,7 +9,7 @@ import { RecentSuccessStoriesComponent } from '../../components/recent-success-s
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   // Featured profiles data - enhanced with more details
   featuredProfiles = [
     {
@@ -106,8 +106,8 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  totalMatches: number = 12500;
-  activeTestimonialIndex: number = 0;
+  totalMatches = 12500;
+  activeTestimonialIndex = 0;
   carouselInterval: any;
 
   ngOnInit(): void {

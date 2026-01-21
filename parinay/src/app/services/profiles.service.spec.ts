@@ -78,7 +78,11 @@ describe('ProfilesService', () => {
 
       const createdProfile: Profile = {
         _id: '123',
-        ...newProfile as Profile
+        name: newProfile.name || 'Unknown',
+        age: newProfile.age || 0,
+        gender: newProfile.gender || 'Other',
+        email: newProfile.email || '',
+        location: newProfile.location || ''
       };
 
       service.addProfile(newProfile as Profile).subscribe(profile => {
@@ -111,8 +115,8 @@ describe('ProfilesService', () => {
 
       service.updateProfile(profileId, updates).subscribe(profile => {
         expect(profile).toEqual(updatedProfile);
-        expect(profile.name).toBe(updates.name);
-        expect(profile.bio).toBe(updates.bio);
+        expect(profile.name).toBe(updates.name!);
+        expect(profile.bio).toBe(updates.bio!);
       });
 
       const req = httpMock.expectOne(`${baseUrl}/${profileId}`);

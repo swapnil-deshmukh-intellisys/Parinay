@@ -12,14 +12,14 @@ import { Profile } from '../../models/profile.model';
   templateUrl: './profile-editor.component.html'
 })
 export class ProfileEditComponent implements OnInit {
-  profileForm: FormGroup<{
+  profileForm = new FormGroup<{
     name: FormControl<string | null>;
     age: FormControl<number | null>;
     gender: FormControl<string | null>;
     religion: FormControl<string | null>;
     location: FormControl<string | null>;
     caste: FormControl<string | null>;
-  }> = new FormGroup({
+  }>({
     name: new FormControl<string | null>(null),
     age: new FormControl<number | null>(null),
     gender: new FormControl<string | null>(null),

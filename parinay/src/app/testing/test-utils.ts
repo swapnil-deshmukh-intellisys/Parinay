@@ -2,12 +2,11 @@
  * Testing utilities for Angular components and services
  */
 
-import { ComponentFixture, TestBed, TestBedStatic } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClient } from '@angular/common/http';
 
 /**
  * Common test module configuration
@@ -33,16 +32,11 @@ export function configureTestModule(imports: any[] = [], providers: any[] = []) 
  * Create a component with full test setup
  */
 export async function createComponent<T>(
-  component: any,
-  configureFn?: (testBed: TestBedStatic) => void
+  component: any
 ): Promise<ComponentFixture<T>> {
   const testBed = TestBed.configureTestingModule({
     ...configureTestModule([component])
   });
-
-  if (configureFn) {
-    configureFn(testBed);
-  }
 
   await testBed.compileComponents();
   return testBed.createComponent<T>(component);
@@ -58,7 +52,7 @@ export function getHttpTestingController(): HttpTestingController {
 /**
  * Wait for async operations
  */
-export function wait(milliseconds: number = 0): Promise<void> {
+export function wait(milliseconds = 0): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
@@ -108,7 +102,7 @@ export function setupLocalStorageMock(): MockLocalStorage {
 /**
  * Create mock HTTP client response
  */
-export function createMockResponse<T>(data: T, status: number = 200, statusText: string = 'OK') {
+export function createMockResponse<T>(data: T, status = 200, statusText = 'OK') {
   return {
     status,
     statusText,

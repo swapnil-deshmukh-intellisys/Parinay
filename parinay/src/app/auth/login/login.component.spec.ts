@@ -56,10 +56,12 @@ describe('LoginComponent', () => {
 
     authService.login.and.returnValue(of({ message: 'Login successful' }));
 
+    // Set form values
+    component.loginForm.setValue(credentials);
+
     // Simulate form submission
-    // Adjust based on your component's actual implementation
     if (component['onSubmit']) {
-      component['onSubmit'](credentials);
+      component['onSubmit']();
     }
 
     expect(authService.login).toHaveBeenCalledWith(credentials);
@@ -71,16 +73,16 @@ describe('LoginComponent', () => {
       password: 'wrongpassword'
     };
 
-    authService.login.and.returnValue(
-      throwError(() => ({ status: 401, message: 'Invalid credentials' }))
-    );
+    authService.login.and.returnValue(throwError(() => new Error('Invalid credentials')));
 
-    // Simulate form submission with error
+    // Set form values
+    component.loginForm.setValue(credentials);
+
+    // Simulate form submission
     if (component['onSubmit']) {
-      component['onSubmit'](credentials);
+      component['onSubmit']();
     }
 
-    expect(authService.login).toHaveBeenCalled();
-    // Add error handling assertions
+    expect(authService.login).toHaveBeenCalledWith(credentials);
   });
 });

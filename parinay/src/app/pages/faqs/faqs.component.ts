@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./faqs.component.css']
 })
 export class FaqsComponent {
-  faqStates: { [key: number]: boolean } = {};
+  faqStates: Record<number, boolean> = {};
 
   toggleFaq(index: number): void {
     // Close all other FAQs when opening a new one
